@@ -35,7 +35,7 @@ public class NuevoElementoFragment extends Fragment {
             String nombre = binding.nombre.getText().toString();
             String descripcion = binding.descripcion.getText().toString();
 
-            elementosViewModel.insertar(new Elemento(nombre, descripcion));
+            elementosViewModel.insertar(new Pokemon(nombre, descripcion));
 
             navController.popBackStack();
         });

@@ -31,7 +31,7 @@ public class MostrarElementoFragment extends Fragment {
 
         elementosViewModel.seleccionado().observe(getViewLifecycleOwner(), elemento -> {
             binding.nombre.setText(elemento.nombre);
-            binding.descripcion.setText(elemento.descripcion);
+            binding.descripcion.setText(elemento.url);
             binding.valoracion.setRating(elemento.valoracion);
 
             binding.valoracion.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {

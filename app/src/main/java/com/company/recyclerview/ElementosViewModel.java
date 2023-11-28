@@ -6,16 +6,18 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 public class ElementosViewModel extends AndroidViewModel {
 
     ElementosRepositorio elementosRepositorio;
 
-    MutableLiveData<List<Elemento>> listElementosMutableLiveData = new MutableLiveData<>();
-    MutableLiveData<Elemento> elementoSeleccionado = new MutableLiveData<>();
+    MutableLiveData<List<Pokemon>> listElementosMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<Pokemon> elementoSeleccionado = new MutableLiveData<>();
 
-    public ElementosViewModel(@NonNull Application application) {
+    public ElementosViewModel(@NonNull Application application) throws IOException {
         super(application);
 
         elementosRepositorio = new ElementosRepositorio();
@@ -23,41 +25,41 @@ public class ElementosViewModel extends AndroidViewModel {
         listElementosMutableLiveData.setValue(elementosRepositorio.obtener());
     }
 
-    MutableLiveData<List<Elemento>> obtener(){
+    MutableLiveData<List<Pokemon>> obtener(){
         return listElementosMutableLiveData;
     }
 
-    void insertar(Elemento elemento){
-        elementosRepositorio.insertar(elemento, new ElementosRepositorio.Callback() {
+    void insertar(Pokemon pokemon){
+        elementosRepositorio.insertar(pokemon, new ElementosRepositorio.Callback() {
             @Override
-            public void cuandoFinalice(List<Elemento> elementos) {
-                listElementosMutableLiveData.setValue(elementos);
+            public void cuandoFinalice(List<Pokemon> pokemons) {
+                listElementosMutableLiveData.setValue(pokemons);
             }
         });
     }
 
-    void eliminar(Elemento elemento){
-        elementosRepositorio.eliminar(elemento, new ElementosRepositorio.Callback() {
+    void eliminar(Pokemon pokemon){
+        elementosRepositorio.eliminar(pokemon, new ElementosRepositorio.Callback() {
             @Override
-            public void cuandoFinalice(List<Elemento> elementos) {
-                listElementosMutableLiveData.setValue(elementos);
+            public void cuandoFinalice(List<Pokemon> pokemons) {
+                listElementosMutableLiveData.setValue(pokemons);
             }
         });
     }
 
-    void actualizar(Elemento elemento, float valoracion){
-        elementosRepositorio.actualizar(elemento, valoracion, new ElementosRepositorio.Callback() {
+    void actualizar(Pokemon pokemon, float valoracion){
+        elementosRepositorio.actualizar(pokemon, valoracion, new ElementosRepositorio.Callback() {
             @Override
-            public void cuandoFinalice(List<Elemento> elementos) {
-                listElementosMutableLiveData.setValue(elementos);
+            public void cuandoFinalice(List<Pokemon> pokemons) {
+                listElementosMutableLiveData.setValue(pokemons);
             }
         });
     }
-    void seleccionar(Elemento elemento){
-        elementoSeleccionado.setValue(elemento);
+    void seleccionar(Pokemon pokemon){
+        elementoSeleccionado.setValue(pokemon);
     }
 
-    MutableLiveData<Elemento> seleccionado(){
+    MutableLiveData<Pokemon> seleccionado(){
         return elementoSeleccionado;
     }
 }
